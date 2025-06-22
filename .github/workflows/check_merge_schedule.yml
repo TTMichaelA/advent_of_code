@@ -1,0 +1,35 @@
+name: Check Merge Schedule - (6AM-3PM PT)
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+      - unlabeled
+  schedule:
+    - cron: "0 * * * *"
+  merge_group:
+    types:
+      - checks_requested
+
+jobs:
+  block:
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+      contents: read
+      pull-requests: read
+      repository-projects: read
+
+    steps:
+      - uses: yykamei/block-merge-based-on-time@v3.0.0
+        with:
+          timezone: US/Pacific
+          after: 15:00
+          before: 06:00
+          base-branches: "(default)"
+          commit-status-context: "Check Merge Schedule - (6AM-3PM PT)"
+          commit-status-description-while-blocking: "PRs can only be merged between 6AM-3PM PT M-F as per Thumbtack policy"
+          prohibited-days-dates: "Saturday, Sunday, 2025-01-01, 2025-01-20, 2025-02-17, 2025-04-18, 2025-05-10/2025-05-18, 2025-05-23/2025-05-26, 2025-06-19, 2025-07-03/2025-07-04, 2025-08-29/2025-09-01, 2025-10-13, 2025-11-11, 2025-11-27/2025-11-28, 2025-12-20/2026-01-01"
+          no-block-label: emergency
