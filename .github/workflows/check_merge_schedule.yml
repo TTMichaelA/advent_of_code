@@ -9,9 +9,6 @@ on:
       - unlabeled
   schedule:
     - cron: "0 * * * *"
-  merge_group:
-    types:
-      - checks_requested
 
 jobs:
   block:
