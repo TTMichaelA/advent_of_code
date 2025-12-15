@@ -2,7 +2,7 @@ def main():
     fuel = 0
     fuel1 = 0
     fuel2 = 0
-    with open("day1i.txt") as puzzle_input:
+    with open("day01.txt") as puzzle_input:
         for line in puzzle_input:
             mass = int(line.strip("\n").strip(" "))
             
